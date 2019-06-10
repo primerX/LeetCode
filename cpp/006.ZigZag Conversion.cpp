@@ -2,10 +2,10 @@ class Solution{
 public:
 	string convert(string s, int numRows)
 	{
+		
 		string temp[numRows];
-		int i = 0;
-		while(i < s.length())
-		{
+		// 遍历字符串, 将 Z 字形变换后的字符串存入 temp 数组中
+		for(int i = 0; i < s.length();){
 			for(int j = 0; j < numRows && i < s.length(); j++){
 				temp[j] += s[i++];
 			}
@@ -13,11 +13,12 @@ public:
 				temp[k] += s[i++];
 			}
 		}
-		string result;
-		for(int j = 0; j < numRows; j++){
-			result += temp[j];
+
+		string ans;
+		for(int i = 0; i < numRows; i++){
+			ans += temp[i];
 		}
-		return result;
+		return ans;
 	}
 
 };
