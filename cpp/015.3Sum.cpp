@@ -1,10 +1,9 @@
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
-        vector<vector<int>> result;		// 定义结果集(二维数组)
+        vector<vector<int> > result;		// 定义结果集(二维数组)
         sort(nums.begin(), nums.end());	//将 nums 从小到大排序
         int n = nums.size();
-        //if(n < 3) return result;
         for(int i = 0; i < n; i++){
         	// 当出现 num[i] > 0 的情况，直接退出
         	if(nums[i] > 0) break;
