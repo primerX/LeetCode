@@ -3,27 +3,29 @@ public:
     vector<int> searchRange(vector<int>& nums, int target) {
         int low = 0, high = nums.size() - 1;
         while(low <= high && nums[low] != target && nums[high] != target){
-        	int mid = low + (high - low) / 2;
-        	if(nums[mid] < target){
-        		low = mid + 1;
-        	}else if(nums[mid] > target){
-        		high = mid - 1;
-        	}else{
-        		break;
-        	}
+            int mid = low + (high - low) / 2;
+            if(nums[mid] < target){
+                low = mid + 1;
+            }else if(nums[mid] > target){
+                high = mid - 1;
+            }else{
+                break;
+            }
         }
-        vector<int> ret(2);
+        vector<int> ret;
         if(low > high){
-            ret[0] = -1; ret[1] = -1;
-        	return ret;
+            ret.push_back(-1);
+            ret.push_back(-1);
+            return ret;
         }
         while(nums[low] != target){
-        	low++;
+            low++;
         }
         while(nums[high] != target){
-        	high--;
+            high--;
         }
-        ret[0] = low; ret[1] = high;
+        ret.push_back(low);
+        ret.push_back(high);
         return ret;
     }
 };

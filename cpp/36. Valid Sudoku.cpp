@@ -29,7 +29,7 @@ public:
         		col_mask[c][idx] = true;
 
         		// 检查区块
-        		int area = (r/3) * 3 + (c/3);
+        		int area = (r/3) * 3 + (c/3);     //计算是第几个区块
         		if(area_mask[area][idx] == true){
         			return false;
         		}

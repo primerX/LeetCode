@@ -5,15 +5,13 @@ public:
         while(low <= high){
         	int mid = low + (high - low) / 2;
         	if(nums[mid] == target) return mid;
-        	// mid 在旋转结点的右边
-        	if(nums[mid] < nums[low]){	
+        	if(nums[mid] < nums[low]){	    // mid 在旋转结点的右边
         		if(target > nums[mid] && target <= nums[high]){
         			low = mid + 1;
         		}else{
         			high = mid - 1;
         		}
-        	}else if(nums[mid] > nums[high]){
-        		// mid 在旋转结点的左边
+        	}else if(nums[mid] > nums[high]){  // mid 在旋转结点的左边
         		if(target >= nums[low] && target < nums[mid]){
         			high = mid - 1;
         		}else{
