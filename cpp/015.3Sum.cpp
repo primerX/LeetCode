@@ -7,6 +7,7 @@ public:
         for(int i = 0; i < n; i++){
         	// 当出现 num[i] > 0 的情况，直接退出
         	if(nums[i] > 0) break;
+            // 防止重复
         	if(i > 0 && nums[i] == nums[i-1]) continue;
         	int begin = i + 1, end = n - 1;
         	while(begin < end)
