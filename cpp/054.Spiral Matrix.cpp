@@ -2,28 +2,25 @@ class Solution {
 public:
     vector<int> spiralOrder(vector<vector<int>>& matrix) {
         vector<int> ret;
-        int row = matrix.size();
-        if(row <= 0) return ret;
-        int col = matrix[0].size();
-        if(col <= 0) return ret;
-        int r, c;
-        for(r = 0, c = 0; r < (row+1)/2 && c < (col+1)/2; r++, c++){
-        	// 上
-        	for(int i = c; i < col - c; i++){
-        		ret.push_back(matrix[r][i]);
-        	}
-        	// 右
-        	for(int i = r+1; i < row-r; i++){
-        		ret.push_back(matrix[i][col-c-1]);
-        	}
-        	// 下
-        	for(int i = col-c-2; row-r-1 > r && i >= c; i--){
-        		ret.push_back(matrix[row-r-1][i]);
-        	}
-        	// 左
-        	for(int i = row-r-2; col-c-1 > c && i > r; i--){
-        		ret.push_back(matrix[i][c]);
-        	}
+        if(matrix.empty()) return ret;
+        int beginX = 0, endX = matrix[0].size() - 1;
+        int beginY = 0, endY = matrix.size() - 1;
+        while(true){
+            // 从左向右
+            for(int col = beginX; col <= endX; ++col) ret.push_back(matrix[beginY][col]);
+            if(++beginY > endY) break;
+
+            // 从上到下
+            for(int row = beginY; row <= endY; ++row) ret.push_back(matrix[row][endX]);
+            if(beginX > --endX) break;
+
+            // 从右向左
+            for(int col = endX; col >= beginX; --col) ret.push_back(matrix[endY][col]);
+            if(beginY > --endY) break;
+
+            // 从下到上
+            for(int row = endY; row >= beginY; --row) ret.push_back(matrix[row][beginX]);
+            if(++beginX > endX) break;
         }
         return ret;
     }
