@@ -1,7 +1,7 @@
 class Solution {
 public:
     vector<vector<int>> subsets(vector<int>& nums) {
-    	int len = nums.size();			// 最终结果的大小
+    	int len = nums.size();			
     	int size = pow(2, len);
         vector<vector<int>> ret(size);
         for(int i = 0; i < size; i++){
