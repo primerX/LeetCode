@@ -10,27 +10,32 @@
 class Solution {
 public:
     vector<vector<int>> levelOrder(TreeNode* root) {
-        vector<vector<int>> result;
-        queue<TreeNode*> current, next;
-        if(root == NULL) return result;
+        vector<vector<int>> v;
+        if(root == NULL) return v;
 
-        current.push(root);
-        while(!current.empty())
-        {
-        	// level 记录每一层结点的 val
-        	vector<int> level;
-        	// 取出 current 中的所有树结点
-        	while(!current.empty())
-        	{
-        		TreeNode *node = current.front();
-        		current.pop();
-        		level.push_back(node->val);
-        		if(node->left != NULL) next.push(node->left);
-        		if(node->right != NULL) next.push(node->right);
-        	}
-        	result.push_back(level);
-        	swap(next, current);
+        queue<TreeNode*> q;
+        vector<int> row;
+
+        q.push(root);
+        //int lev = 0;
+
+        while(!q.empty()){
+            int size = q.size();
+            while(size--){
+                // 取出队列首元素
+                TreeNode *temp = q.front();
+                q.pop();
+                row.push_back(temp->val);
+                if(temp->left != NULL) { q.push(temp->left); }
+                if(temp->right != NULL) { q.push(temp->right); }
+            }
+            // if(lev % 2){     // 偶数层
+            //  reverse(row.begin(), row.end());
+            // }
+            v.push_back(row);
+            //lev++;
+            row.clear();
         }
-        return result;
+        return v;
     }
 };
