@@ -1,26 +1,22 @@
 class Solution {
 public:
     bool isPalindrome(string s) {
-        // 空字符串
-        if(s.length() == 0){
-            return true;
-        }
-        int i = 0, j = s.length() - 1;
-        while(i < j)
-        {
-            while(i < j && !isalnum(s[i])){
-                i++;
-            }
-            while(i < j && !isalnum(s[j])){
-                j--;
-            }
-            if(i < j && tolower(s[i]) != tolower(s[j])){
+        s = removeNoise(s);
+        for(int i = 0; i < s.size()/2; i++){
+            if(s[i] != s[s.size()-i-1]){
                 return false;
-            }else{
-                i++;
-                j--;
             }
         }
         return true;
+    }
+
+    string removeNoise(string &s){
+        string ret;
+        for(int i = 0; i < s.size(); i++){
+            if(isalpha(s[i]) || isdigit(s[i])){
+                ret.push_back(tolower(s[i]));
+            }
+        }
+        return ret;
     }
 };
