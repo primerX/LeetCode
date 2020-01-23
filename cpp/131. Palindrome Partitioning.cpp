@@ -35,7 +35,6 @@ public:
 		return true;
 	}
 
-
 	void partitionHelper(string &s, int start, vector<string> &output, vector<vector<string>> &result){
 		if(start == s.size()){
 			result.push_back(output);
