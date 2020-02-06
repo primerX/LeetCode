@@ -1,60 +1,27 @@
 class Solution {
 public:
     int evalRPN(vector<string> &tokens) {
-        int i =0;
-        bool err = false;
-        vector<int> exp;
-        for (int i=0; i<tokens.size() && !err; i++ ){
-            if (isNum(tokens[i])) {
-                exp.push_back(value);
-            } else if( isOp(tokens[i])==true ) {
-                if (exp.size() < 2) {
-                    return 0; //ERROR
-                }
-                int lhs, rhs;
-                rhs = exp.back();
-                exp.pop_back();
-                lhs = exp.back();
-                exp.pop_back();
-
-                int evlValue;
-                if (tokens[i]=="+"){
-                    evlValue = lhs + rhs;    
-                }else if (tokens[i]=="-"){
-                    evlValue = lhs - rhs;
-                }else if (tokens[i]=="*"){
-                    evlValue = lhs * rhs;
-                }else if (tokens[i]=="/"){
-                    evlValue = lhs / rhs;
-                }
-
-                exp.push_back(evlValue);
-
-            }else {
-                return 0; //ERROR 
+        stack<string> s;
+        for(auto token : tokens){
+            if(!is_operator(token)){
+                s.push(token);
+            }else{
+                int y = stoi(s.top());
+                s.pop();
+                int x = stoi(s.top());
+                s.pop();
+                if(token[0] == '+') x += y;
+                else if(token[0] == '-') x -= y;
+                else if(token[0] == '*') x *= y;
+                else                     x /= y;
+                s.push(to_string(x));
             }
         }
-
-        if (exp.size()==1){
-            return exp.back();
-        }
-        return 0;        
-
+        return stoi(s.top());
     }
 
 private:
-    long value;
-
-    bool isOp(string &op) {
-        return (op=="+" || op=="-" || op=="*" || op=="/");
-    }
-
-    bool isNum(string &num) {
-        char *end;
-        value = strtol(num.c_str(), &end, 10); 
-        if (end == num.c_str() || *end != '\0' || errno == ERANGE){
-            return false;
-        }
-        return true;
+    bool is_operator(const string &op){
+        return op.size()==1 && string("+-*/").find(op)!=string::npos;
     }
 };
