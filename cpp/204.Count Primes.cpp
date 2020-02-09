@@ -1,17 +1,17 @@
 class Solution {
 public:
     int countPrimes(int n) {
-        vector<int> book(n, 1);
+        vector<bool> isPrimer(n, true);
         for(int i = 2; i * i < n; i++){
-            if(book[i] == 1){
+            if(isPrimer[i]){
                 for(int j = i*i; j < n; j += i){
-                    book[j] = 0;
+                    isPrimer[j] = false;
                 }
             }
         }
         int count = 0;
         for(int i = 2; i < n; i++){
-            if(book[i] == 1){
+            if(isPrimer[i]){
                 count++;
             }
         }
