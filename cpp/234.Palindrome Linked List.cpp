@@ -48,3 +48,27 @@ public:
         return true;
     }
 };
+
+
+class Solution{
+public:
+	// 将所有节点入栈，然后一一出栈并比较
+	bool isPalindrome(ListNode *head){
+		stack<int> s;
+		ListNode *p = head;
+		while(p){
+			s.push(p->val);
+			p = p->next;
+		}
+		p = head;
+		while(p){
+			if(p->val != s.top()){
+				return false;
+			}
+			s.pop();
+			p = p->next;
+		}
+		return true;
+	}
+
+};
