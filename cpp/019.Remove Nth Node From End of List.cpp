@@ -30,3 +30,32 @@ public:
         return head;
     }
 };
+
+// 使用一趟扫描实现
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode* dummyNode = new ListNode(0);
+        dummyNode->next = head;
+        ListNode *p = dummyNode;
+        ListNode *q = dummyNode;
+
+        for(int i = 0; i <= n; i++){
+            q = q->next;
+        }
+
+        while(q){
+            p = p->next;
+            q = q->next;
+        }
+        // 注意销毁结点，良好的编码习惯
+        ListNode* temp = p->next;
+        p->next = temp->next;
+        delete temp;
+
+        ListNode* newHead = dummyNode->next;
+        delete dummyNode;
+        
+        return newHead;
+    }
+};
