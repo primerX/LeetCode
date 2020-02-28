@@ -30,3 +30,31 @@ public:
         return sum;
     }
 };
+
+// 对上述方法进行优化
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int n = height.size();
+        if(n < 1) return 0;
+        int sum = 0;
+        vector<int> max_left(n, 0);
+        vector<int> max_right(n, 0);
+
+        for(int i = 1; i < n-1; i++){
+            max_left[i] = max(max_left[i-1], height[i-1]);
+        }
+
+        for(int i = n-2; i >= 0; i--){
+            max_right[i] = max(max_right[i+1], height[i+1]);
+        }
+        
+        for(int i = 1; i < n-1; i++){
+            int minCol = min(max_left[i], max_right[i]);
+            if(minCol > height[i]){
+                sum += (minCol - height[i]);
+            }
+        }
+        return sum;
+    }
+};
